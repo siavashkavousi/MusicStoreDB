@@ -1,14 +1,14 @@
+CREATE TABLE album (
+  album_id INT AUTO_INCREMENT PRIMARY KEY,
+  name     VARCHAR(32) NOT NULL
+);
+
 CREATE TABLE track (
   track_id INT AUTO_INCREMENT PRIMARY KEY,
   album_id INT         NOT NULL,
   name     VARCHAR(32) NOT NULL,
   duration TIME,
   FOREIGN KEY (album_id) REFERENCES album (album_id)
-);
-
-CREATE TABLE album (
-  album_id INT AUTO_INCREMENT PRIMARY KEY,
-  name     VARCHAR(32) NOT NULL
 );
 
 CREATE TABLE artist (
@@ -23,6 +23,12 @@ CREATE TABLE track_artist (
   FOREIGN KEY (artist_id) REFERENCES artist (artist_id)
 );
 
+CREATE TABLE customer (
+  customer_id INT AUTO_INCREMENT PRIMARY KEY,
+  name        VARCHAR(32) NOT NULL,
+  age         INT
+);
+
 CREATE TABLE comment (
   comment_id  INT AUTO_INCREMENT PRIMARY KEY,
   track_id    INT          NOT NULL,
@@ -30,12 +36,6 @@ CREATE TABLE comment (
   content     VARCHAR(255) NOT NULL,
   FOREIGN KEY (track_id) REFERENCES track (track_id),
   FOREIGN KEY (customer_id) REFERENCES customer (customer_id)
-);
-
-CREATE TABLE customer (
-  customer_id INT AUTO_INCREMENT PRIMARY KEY,
-  name        VARCHAR(32) NOT NULL,
-  age         INT
 );
 
 CREATE TABLE genre (
@@ -49,9 +49,8 @@ CREATE TABLE track_genre (
   FOREIGN KEY (type) REFERENCES genre (type)
 );
 
-CREATE TABLE 'order' (
-  order_id INT AUTO_INCREMENT PRIMARY KEY,
-  price    INT
+CREATE TABLE music_store.order (
+  order_id INT AUTO_INCREMENT PRIMARY KEY
 );
 
 CREATE TABLE track_order (
