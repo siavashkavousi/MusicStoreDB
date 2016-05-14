@@ -32,10 +32,20 @@ HAVING avg(star)
 ORDER BY avg(star) DESC;
 
 # Query #3
-SELECT customer_id
+SELECT DISTINCT name
 FROM customer
   NATURAL JOIN comment
 WHERE track_id = (SELECT track_id
                   FROM comment
                   GROUP BY track_id
-                  HAVING avg(star) > 9)
+                  HAVING avg(star) > 9);
+
+# Query #4
+SELECT
+  artist.name,
+  genre.type
+FROM (artist
+  JOIN track_artist USING (artist_id)
+  JOIN track USING (track_id)) JOIN track_genre USING (track_id)
+  JOIN genre USING (type_id)
+ORDER BY artist_id
