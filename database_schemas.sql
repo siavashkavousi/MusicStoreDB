@@ -1,19 +1,19 @@
 CREATE TABLE album (
-  album_id INT AUTO_INCREMENT PRIMARY KEY,
-  name     VARCHAR(32) NOT NULL,
-  price    INT         NOT NULL
+  album_id INT PRIMARY KEY,
+  name     VARCHAR(32) NOT NULL
 );
 
 CREATE TABLE track (
-  track_id INT AUTO_INCREMENT PRIMARY KEY,
+  track_id INT PRIMARY KEY,
   album_id INT         NOT NULL,
   name     VARCHAR(32) NOT NULL,
+  price    INT         NOT NULL,
   duration TIME,
   FOREIGN KEY (album_id) REFERENCES album (album_id)
 );
 
 CREATE TABLE artist (
-  artist_id INT AUTO_INCREMENT PRIMARY KEY,
+  artist_id INT PRIMARY KEY,
   name      VARCHAR(32) NOT NULL
 );
 
@@ -21,38 +21,41 @@ CREATE TABLE track_artist (
   track_id  INT,
   artist_id INT NOT NULL,
   FOREIGN KEY (track_id) REFERENCES track (track_id),
-  FOREIGN KEY (artist_id) REFERENCES artist (artist_id)
+  FOREIGN KEY (artist_id) REFERENCES artist (artist_id),
+  PRIMARY KEY (track_id, artist_id)
 );
 
 CREATE TABLE customer (
-  customer_id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT PRIMARY KEY,
   name        VARCHAR(32) NOT NULL,
   age         INT
 );
 
 CREATE TABLE comment (
-  comment_id  INT AUTO_INCREMENT PRIMARY KEY,
+  comment_id  INT PRIMARY KEY,
   track_id    INT          NOT NULL,
   customer_id INT          NOT NULL,
   content     VARCHAR(255) NOT NULL,
-  star        VARCHAR(5)   NOT NULL,
+  star        INT          NOT NULL,
   FOREIGN KEY (track_id) REFERENCES track (track_id),
   FOREIGN KEY (customer_id) REFERENCES customer (customer_id)
 );
 
 CREATE TABLE genre (
-  type VARCHAR(20) PRIMARY KEY
+  type_id INT PRIMARY KEY,
+  type    VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE track_genre (
-  track_id INT         NOT NULL,
-  type     VARCHAR(20) NOT NULL,
+  track_id INT NOT NULL,
+  type_id  INT NOT NULL,
   FOREIGN KEY (track_id) REFERENCES track (track_id),
-  FOREIGN KEY (type) REFERENCES genre (type)
+  FOREIGN KEY (type_id) REFERENCES genre (type_id),
+  PRIMARY KEY (track_id, type_id)
 );
 
 CREATE TABLE music_store.order (
-  order_id    INT AUTO_INCREMENT PRIMARY KEY,
+  order_id    INT PRIMARY KEY,
   customer_id INT NOT NULL
 );
 
@@ -60,5 +63,6 @@ CREATE TABLE track_order (
   track_id INT NOT NULL,
   order_id INT,
   FOREIGN KEY (track_id) REFERENCES track (track_id),
-  FOREIGN KEY (order_id) REFERENCES music_store.order (order_id)
+  FOREIGN KEY (order_id) REFERENCES music_store.order (order_id),
+  PRIMARY KEY (track_id, order_id)
 );
