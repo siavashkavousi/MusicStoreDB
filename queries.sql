@@ -37,9 +37,8 @@ FROM customer
   NATURAL JOIN comment
 WHERE track_id = (SELECT track_id
                   FROM comment
-                  WHERE star
                   GROUP BY track_id
-                  HAVING avg(star) > 9);
+                  HAVING 9 <= min(star));
 
 # Query #4
 SELECT
@@ -53,7 +52,7 @@ GROUP BY artist_id, artist.name
 HAVING count(DISTINCT type)
 ORDER BY artist_id;
 
-# Query #5 - should be replaced with not exist :(
+# Query #5
 SELECT artist.name
 FROM artist
 WHERE artist_id NOT IN
@@ -63,7 +62,7 @@ WHERE artist_id NOT IN
          JOIN track USING (track_id)
        WHERE album_id IS NULL);
 
-# Query #6 - track table should be deleted 
+# Query #6
 SELECT artist.name
 FROM artist
   JOIN track_artist USING (artist_id)
@@ -78,7 +77,7 @@ FROM artist
 # Query #7
 SELECT
   type,
-  count(order_id)
+  count(order_id) AS num_of_orders
 FROM (`order`
   NATURAL JOIN track_order
   NATURAL JOIN track) NATURAL JOIN track_genre
