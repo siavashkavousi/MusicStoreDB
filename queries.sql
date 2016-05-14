@@ -30,3 +30,12 @@ WHERE type = 'Rock'
 GROUP BY track_id, track.name
 HAVING avg(star)
 ORDER BY avg(star) DESC;
+
+# Query #3
+SELECT customer_id
+FROM customer
+  NATURAL JOIN comment
+WHERE track_id = (SELECT track_id
+                  FROM comment
+                  GROUP BY track_id
+                  HAVING avg(star) > 9)
