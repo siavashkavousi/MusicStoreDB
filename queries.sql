@@ -68,3 +68,14 @@ FROM artist
       JOIN track USING (track_id))
     GROUP BY track_id
     HAVING count(artist_id) > 2) AS t) USING (track_id);
+
+# Query #7
+SELECT
+  type,
+  count(order_id)
+FROM (`order`
+  NATURAL JOIN track_order
+  NATURAL JOIN track) NATURAL JOIN track_genre
+  NATURAL JOIN genre
+GROUP BY type
+HAVING count(order_id)

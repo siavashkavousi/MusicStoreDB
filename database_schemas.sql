@@ -5,7 +5,7 @@ CREATE TABLE album (
 
 CREATE TABLE track (
   track_id INT PRIMARY KEY,
-  album_id INT         NOT NULL,
+  album_id INT,
   name     VARCHAR(32) NOT NULL,
   price    INT         NOT NULL,
   duration TIME,
