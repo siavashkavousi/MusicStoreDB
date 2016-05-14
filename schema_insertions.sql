@@ -17,7 +17,7 @@ INSERT INTO artist (artist_id, name) VALUES (1, 'Moein'), (2, 'The Piano Guys'),
   (7, 'Kazem'), (8, 'Johnson');
 
 INSERT INTO track_artist (track_id, artist_id) VALUES (1, 1), (2, 1), (3, 3), (4, 2),
-  (5, 2), (6, 2), (7, 4), (8, 4), (9, 4), (10, 5), (11, 6), (11, 7), (11, 8);
+  (5, 2), (6, 2), (7, 4), (8, 4), (9, 4), (10, 5), (11, 6), (11, 7), (11, 8), (11, 5);
 
 INSERT INTO customer (customer_id, name, age) VALUES (1, 'Siavash', 22),
   (2, 'Ali', 20), (3, 'Ghasemi', 21), (4, 'Goolakh', 33);
@@ -32,7 +32,7 @@ INSERT INTO comment (comment_id, track_id, customer_id, content, star) VALUES
   (1, 2, 1, 'Alie in ahang', 5), (2, 6, 2, 'Bass khoobi dare', 2),
   (3, 7, 1, 'Excellent', 5), (4, 8, 3, 'WTF', 1), (5, 8, 2, 'Good :)', 3),
   (6, 7, 3, 'Terrible', 1), (7, 9, 1, 'Love it', 9.5),
-  (8, 9, 1, 'Fascinating', 10), (9, 9, 2, 'Wow', 9), (10, 9, 4, 'Lol', 8.9);
+  (8, 9, 1, 'Fascinating', 10), (9, 9, 2, 'Wow', 9), (10, 9, 4, 'Lol', 9);
 
 INSERT INTO `order` (order_id, customer_id) VALUES
   (1, 1), (2, 1), (3, 1), (4, 5), (5, 1), (6, 2);

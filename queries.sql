@@ -1,10 +1,5 @@
 USE music_store;
 
-SELECT *
-FROM track
-  JOIN (track_genre
-    JOIN genre USING (type_id)) USING (track_id);
-
 # Query #1
 SELECT
   album_id,
