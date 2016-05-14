@@ -37,17 +37,20 @@ FROM customer
   NATURAL JOIN comment
 WHERE track_id = (SELECT track_id
                   FROM comment
+                  WHERE star
                   GROUP BY track_id
                   HAVING avg(star) > 9);
 
 # Query #4
 SELECT
   artist.name,
-  type
+  count(DISTINCT type)
 FROM (artist
   JOIN track_artist USING (artist_id)
   JOIN track USING (track_id)) JOIN track_genre USING (track_id)
   JOIN genre USING (type_id)
+GROUP BY artist_id, artist.name
+HAVING count(DISTINCT type)
 ORDER BY artist_id;
 
 # Query #5
@@ -78,4 +81,6 @@ FROM (`order`
   NATURAL JOIN track) NATURAL JOIN track_genre
   NATURAL JOIN genre
 GROUP BY type
-HAVING count(order_id)
+HAVING count(order_id);
+
+# Query #8 (Optional)
