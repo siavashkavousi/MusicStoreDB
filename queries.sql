@@ -53,14 +53,17 @@ GROUP BY artist_id, artist.name
 HAVING count(DISTINCT type)
 ORDER BY artist_id;
 
-# Query #5
+# Query #5 - should be replaced with not exist :(
 SELECT artist.name
-FROM (artist
-  JOIN track_artist USING (artist_id)
-  JOIN track USING (track_id))
-WHERE album_id IS NOT NULL;
+FROM artist
+WHERE artist_id NOT IN
+      (SELECT artist_id
+       FROM artist
+         JOIN track_artist USING (artist_id)
+         JOIN track USING (track_id)
+       WHERE album_id IS NULL);
 
-# Query #6
+# Query #6 - track table should be deleted 
 SELECT artist.name
 FROM artist
   JOIN track_artist USING (artist_id)
