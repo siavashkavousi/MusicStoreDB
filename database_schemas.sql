@@ -1,6 +1,7 @@
 CREATE TABLE album (
   album_id INT AUTO_INCREMENT PRIMARY KEY,
-  name     VARCHAR(32) NOT NULL
+  name     VARCHAR(32) NOT NULL,
+  price    INT         NOT NULL
 );
 
 CREATE TABLE track (
@@ -34,6 +35,7 @@ CREATE TABLE comment (
   track_id    INT          NOT NULL,
   customer_id INT          NOT NULL,
   content     VARCHAR(255) NOT NULL,
+  star        VARCHAR(5)   NOT NULL,
   FOREIGN KEY (track_id) REFERENCES track (track_id),
   FOREIGN KEY (customer_id) REFERENCES customer (customer_id)
 );
@@ -50,12 +52,13 @@ CREATE TABLE track_genre (
 );
 
 CREATE TABLE music_store.order (
-  order_id INT AUTO_INCREMENT PRIMARY KEY
+  order_id    INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT NOT NULL
 );
 
 CREATE TABLE track_order (
   track_id INT NOT NULL,
   order_id INT,
   FOREIGN KEY (track_id) REFERENCES track (track_id),
-  FOREIGN KEY (order_id) REFERENCES `order` (order_id)
+  FOREIGN KEY (order_id) REFERENCES music_store.order (order_id)
 );
